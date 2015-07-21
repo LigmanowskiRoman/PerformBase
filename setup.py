@@ -1,18 +1,17 @@
 from __future__ import print_function
-from setuptools import setup
+from setuptools import setup, find_packages
 import codecs
 import os
 import re
 
 
-here = path.abspath(path.dirname(__file__))
+here = os.path.abspath(os.path.dirname(__file__))
 def read(file_paths, default=""):
     # intentionally *not* adding an encoding option to open
     try:
         return codecs.open(os.path.join(here, *file_paths), 'r').read()
     except:
         return default
-
 
 def find_version(file_paths):
     version_file = read(file_paths)
@@ -27,7 +26,7 @@ long_description=read('README.md', default=description)
 
 setup(
     name='performbase',
-    version=(['performbase', '__init__.py'])
+    version=find_version(['performbase', '__init__.py']),
     url='http://gitlab/qa/performbase',
     author='PERFORM',
     license='Proprietary',
