@@ -1,1 +1,1 @@
-pip install git+ssh://git@10.12.23.123/qa/performbase.git#egg=performbase
+pip install git+ssh://git@stash.performgroup.com/qa/performbase.git#egg=performbase
