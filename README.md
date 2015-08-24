@@ -35,10 +35,12 @@ class TestCases(BaseTestCase):
 ### Get article content from Perform Feeds
 
 ```python
-import requests
 from performbase import PfFieldsBuilder
 from performbase import PfFilterBuilder
 from performbase import PfQueryBuilder
+# Perform Feeds related data
+PF_DOMAIN = "goalyorkshire-article"
+PF_OUTLETKEY = "dk8a1orhjncy1rpirnm9ni6pb"
 
 
 def fetch_article_content():
@@ -53,14 +55,13 @@ def fetch_article_content():
     filters = pf_filter_builder.\
         filter_by_article_type_id("default").\
         build()
-    url = pf_query_builder.build_article_url(domain=PF_DOMAIN, outletkey=PF_OUTLETKEY,
+    response = pf_query_builder.fetch_article_list(domain=PF_DOMAIN, outletkey=PF_OUTLETKEY,
                                              fields=fields, filters=filters)
-    article = requests.get(url).json()["articles"][0]
+    article = response["articles"][0]
     return article["headline"], article["teaser"], article["body"]
 ```
 ### Get matches from Sports Data API
 ```python
-import requests
 from performbase import SportsDataQueryBuilder
 # Sports Data related data
 SD_OUTLETKEY = "auth1p1"
@@ -68,10 +69,10 @@ TMCAL_UUID = "36v49e365gj6415jilkram7dh"
 
 
 def fetch_n_matches_description(n):
-    url = SportsDataQueryBuilder.build_team_calendar_url(SD_OUTLETKEY, TMCAL_UUID)
-    response = requests.get(url).json()["match"]
+    response = SportsDataQueryBuilder.fetch_team_calendar(SD_OUTLETKEY, TMCAL_UUID)
+    match_info = response["match"]
     matches = list()
     for i in range(0, n):
-        matches.append(response[i]['matchInfo']['description'])
+        matches.append(match_info[i]['matchInfo']['description'])
     return matches
 ```
