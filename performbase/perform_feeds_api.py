@@ -1,3 +1,9 @@
+import requests
+
+field = {'uuid': 'uuid', 'articleTypeId': 'atId', 'headline': 'hl', 'shortHeadline': 'shl', 'teaser': 'tsr',
+        'publishedTime': 'pt', 'lastUpdateTime': 'lut', 'language': 'lng', 'externalUrl': 'exu', 'seoPageUrl': 'spu',
+        'category': 'ctg', "body": "bd", "relatedLinks": "rl"}
+
 class PfHelper(object):
     @staticmethod
     def append_filter(name, value):
@@ -57,6 +63,7 @@ class PfFilterBuilder(PfHelper):
 class PfQueryBuilder(object):
 
     @staticmethod
-    def build_article_url(domain, outletkey, uuid='', fields='', filters=''):
-        return "http://{}.performfeeds.com/article/{}{}?_fmt=json&_rt=b{}{}".format(domain, outletkey,
-                                                                                    uuid, fields, filters)
+    def fetch_article_list(domain, outletkey, uuid='', fields='', filters=''):
+        url = "http://{}.performfeeds.com/article/{}{}?_fmt=json&_rt=b{}{}".format(domain, outletkey,
+                                                                                   uuid, fields, filters)
+        return requests.get(url).json()
