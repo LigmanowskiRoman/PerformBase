@@ -27,12 +27,12 @@ long_description=read('README.md', default=description)
 setup(
     name='performbase',
     version=find_version(['performbase', '__init__.py']),
-    url='http://gitlab/qa/performbase',
+    url='https://stash.performgroup.com/projects/QA/repos/performbase/browse',
     author='PERFORM',
     license='Proprietary',
     keywords='selenium testing development',
     packages=find_packages(),
-    install_requires=['selenium>=2.46.0', 'elementium>=1.1.0', 'requests'],
+    install_requires=['selenium>=2.46.0', 'elementium>=1.1.0'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
