@@ -6,12 +6,15 @@ import re
 
 
 here = os.path.abspath(os.path.dirname(__file__))
+
+
 def read(file_paths, default=""):
     # intentionally *not* adding an encoding option to open
     try:
         return codecs.open(os.path.join(here, *file_paths), 'r').read()
     except:
         return default
+
 
 def find_version(file_paths):
     version_file = read(file_paths)
@@ -21,8 +24,8 @@ def find_version(file_paths):
         return version_match.group(1)
     raise RuntimeError("Unable to find version string.")
 
-description='Reusable Base Test Case Module',
-long_description=read('README.md', default=description)
+description = 'Reusable Base Test Case Module'
+long_description = read('README.md', default=description)
 
 setup(
     name='performbase',
