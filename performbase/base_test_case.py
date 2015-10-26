@@ -9,6 +9,8 @@ class BaseTestCase(unittest.TestCase):
     browser_type = None
     url = None
     device = None
+    width = None
+    height = None
 
     @classmethod
     def setUpClass(cls):
@@ -22,7 +24,9 @@ class BaseTestCase(unittest.TestCase):
             browser_options["chrome_options"] = chrome_options
         cls.wdriver = getattr(webdriver, cls.browser_type)(**browser_options)
         cls.driver = SeElements(cls.wdriver)
+        cls.driver.set_window_size(cls.width, cls.height)
 
     @classmethod
     def tearDownClass(cls):
         cls.wdriver.quit()
+
