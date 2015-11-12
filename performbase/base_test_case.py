@@ -1,4 +1,5 @@
 import unittest
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from elementium.drivers.se import SeElements
@@ -29,4 +30,11 @@ class BaseTestCase(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.wdriver.quit()
+
+    def setUp(self):
+        self.startTime = time.time()
+
+    def tearDown(self):
+        totalTime = time.time() - self.startTime
+        print "took %.3f s" % (totalTime)
 
