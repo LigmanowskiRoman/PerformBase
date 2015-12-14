@@ -1,34 +1,20 @@
 import atexit
 import unittest
 import time
-from selenium import webdriver as Webdriver
-from selenium.webdriver.chrome.options import Options
-from elementium.drivers.se import SeElements
+from web_driver_instance import WebDriverInstance
 
 
 class BaseTestCase(unittest.TestCase):
 
-    browser_type = None
-    url = None
-    device = None
-    width = None
-    height = None
-    webdriver = None
-
     @classmethod
     def setUpClass(cls):
-        if BaseTestCase.webdriver is None:
-            browser_options = {}
-            BaseTestCase.url = cls.url
-            if cls.browser_type == "Chrome" and cls.device:
-                chrome_options = Options()
-                chrome_parameters = {}
-                chrome_parameters["deviceName"] = cls.device
-                chrome_options.add_experimental_option("mobileEmulation", chrome_parameters)
-                browser_options["chrome_options"] = chrome_options
-            BaseTestCase.webdriver = getattr(Webdriver, cls.browser_type)(**browser_options)
-            BaseTestCase.driver = SeElements(BaseTestCase.webdriver)
-            cls.driver.set_window_size(cls.width, cls.height)
+        cls.driver = WebDriverInstance(browser_type=cls.browser_type, device=cls.device,
+                                       width=cls.width, height=cls.height)
+        cls.pageObjectInit()
+
+    @classmethod
+    def pageObjectInit(cls):
+        pass
 
     def setUp(self):
         self.start_time = time.time()
@@ -39,7 +25,8 @@ class BaseTestCase(unittest.TestCase):
 
 
 def all_done():
-    if BaseTestCase.webdriver != None:
-        BaseTestCase.webdriver.quit()
+    if WebDriverInstance.driver is not None:
+        WebDriverInstance.driver.browser.quit()
 
 atexit.register(all_done)
+
