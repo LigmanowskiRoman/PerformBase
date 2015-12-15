@@ -19,7 +19,7 @@ pip install git+ssh://git@stash.performgroup.com/qa/performbase.git#egg=performb
 
 ## Usage example
 
-### As setUpClass and tearDownClass
+### As setUpClass and tearDownClass with PageObject initialization in one place
 ```python
 from performbase import BaseTestCase
 
@@ -27,6 +27,11 @@ from performbase import BaseTestCase
 class TestCases(BaseTestCase):
     browser_type = "Chrome"
     url = "http://www.google.com"
+
+    @classmethod
+    def pageObjectInit(cls):
+        #Initialize all your Page Objects here
+        pass
 
     def test_open_sample_webpage(self):
         self.driver.navigate(self.url)
