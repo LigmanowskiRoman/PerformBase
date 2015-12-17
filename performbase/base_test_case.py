@@ -25,7 +25,7 @@ class BaseTestCase(unittest.TestCase):
 
 
 def all_done():
-    if WebDriverInstance.driver is not None:
+    if WebDriverInstance._WebDriverInstance__instance is not None:
         WebDriverInstance.driver.browser.quit()
 
 atexit.register(all_done)
