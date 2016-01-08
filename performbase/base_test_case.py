@@ -8,8 +8,9 @@ class BaseTestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.driver = WebDriverInstance(browser_type=cls.browser_type, device=cls.device,
-                                       width=cls.width, height=cls.height)
+        if cls.browser_type:
+            cls.driver = WebDriverInstance(browser_type=cls.browser_type, device=cls.device,
+                                           width=cls.width, height=cls.height)
         cls.pageObjectInit()
 
     @classmethod
