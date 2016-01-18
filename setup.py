@@ -35,7 +35,7 @@ setup(
     license='Proprietary',
     keywords='selenium testing development',
     packages=find_packages(),
-    install_requires=['selenium>=2.46.0', 'elementium>=1.1.0'],
+    install_requires=['selenium==2.48.0', 'elementium>=1.1.0'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
