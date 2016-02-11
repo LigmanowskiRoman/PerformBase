@@ -14,7 +14,7 @@ This projects attempts to comply with PEP8. If you notice compliance oversights,
 via pip
 
 ```bash
-pip install git+ssh://git@stash.performgroup.com/qa/performbase.git#egg=performbase
+pip install git+ssh://git@stash.performgroup.com/p0/performbase.git#egg=performbase
 ```
 
 ## Usage example
