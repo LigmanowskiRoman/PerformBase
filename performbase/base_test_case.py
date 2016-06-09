@@ -10,7 +10,7 @@ class BaseTestCase(unittest.TestCase):
     def setUpClass(cls):
         if cls.browser_type:
             cls.driver = WebDriverInstance(browser_type=cls.browser_type, device=cls.device,
-                                           width=cls.width, height=cls.height)
+                                           width=cls.width, height=cls.height, proxy=getattr(cls, "proxy", None))
         cls.pageObjectInit()
 
     @classmethod
