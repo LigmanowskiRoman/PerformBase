@@ -40,7 +40,7 @@ class WebDriverInstance(object):
     @classmethod
     def getInstance(cls, *args, **kwargs):
         if cls.__instance is None:
-            cls.__instance = object.__new__(cls, *args, **kwargs)
+            cls.__instance = object.__new__(cls)
             browser_options = {}
             if kwargs["browser_type"] == "Chrome":
                 if kwargs["device"]:

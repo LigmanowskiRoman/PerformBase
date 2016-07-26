@@ -1,7 +1,7 @@
 import atexit
 import unittest
 import time
-from web_driver_instance import WebDriverInstance
+from .web_driver_instance import WebDriverInstance
 
 
 class BaseTestCase(unittest.TestCase):
@@ -22,7 +22,7 @@ class BaseTestCase(unittest.TestCase):
 
     def tearDown(self):
         total_time = time.time() - self.start_time
-        print "took %.3f s" % total_time
+        print("took %.3f s" % total_time)
 
 
 def all_done():
