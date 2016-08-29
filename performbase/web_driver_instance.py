@@ -5,7 +5,6 @@ from elementium.drivers.se import SeElements
 
 
 class WebDriverInstance(object):
-
     __instance = None
 
     def __new__(self, *args, **kwargs):
@@ -47,12 +46,16 @@ class WebDriverInstance(object):
                     chrome_options = Options()
                     chrome_parameters = dict()
                     chrome_parameters["deviceName"] = kwargs["device"]
-                    chrome_options.add_experimental_option("mobileEmulation", chrome_parameters)
+                    chrome_options.add_experimental_option("mobileEmulation",
+                                                           chrome_parameters)
                     browser_options["chrome_options"] = chrome_options
                 if "proxy" in kwargs and type(kwargs["proxy"]) is str:
                     desired_capabilities = Webdriver.DesiredCapabilities.CHROME.copy()
-                    desired_capabilities['proxy'] = WebDriverInstance.chrome_proxy(kwargs["proxy"])
-                    browser_options["desired_capabilities"] = desired_capabilities
+                    desired_capabilities[
+                        'proxy'] = WebDriverInstance.chrome_proxy(
+                        kwargs["proxy"])
+                    browser_options[
+                        "desired_capabilities"] = desired_capabilities
                 cls.webdriver = Webdriver.Chrome(**browser_options)
             elif kwargs["browser_type"] == "Firefox":
                 proxy = None
@@ -60,7 +63,7 @@ class WebDriverInstance(object):
                     proxy = WebDriverInstance.firefox_proxy(kwargs["proxy"])
                 cls.webdriver = Webdriver.Firefox(proxy=proxy)
             else:
-                cls.webdriver = getattr(Webdriver, kwargs["browser_type"])
+                cls.webdriver = getattr(Webdriver, kwargs["browser_type"])()
             cls.driver = SeElements(cls.webdriver)
             cls.driver.set_window_size(kwargs["width"], kwargs["height"])
         return cls.__instance.driver
