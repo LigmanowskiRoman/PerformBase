@@ -5,12 +5,13 @@ from .web_driver_instance import WebDriverInstance
 
 
 class BaseTestCase(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         if cls.browser_type:
-            cls.driver = WebDriverInstance(browser_type=cls.browser_type, device=cls.device,
-                                           width=cls.width, height=cls.height, proxy=getattr(cls, "proxy", None))
+            cls.driver = WebDriverInstance(browser_type=cls.browser_type,
+                                           device=cls.device,
+                                           width=cls.width, height=cls.height,
+                                           proxy=getattr(cls, "proxy", None))
         cls.pageObjectInit()
 
     @classmethod
@@ -29,5 +30,5 @@ def all_done():
     if WebDriverInstance._WebDriverInstance__instance is not None:
         WebDriverInstance.driver.browser.quit()
 
-atexit.register(all_done)
 
+atexit.register(all_done)
