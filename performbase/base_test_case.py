@@ -9,8 +9,9 @@ class BaseTestCase(unittest.TestCase):
     def setUpClass(cls):
         if cls.browser_type:
             cls.driver = WebDriverInstance(browser_type=cls.browser_type,
-                                           device=cls.device,
-                                           width=cls.width, height=cls.height,
+                                           device=getattr(cls, "device", None),
+                                           width=getattr(cls, "width", None),
+                                           height=getattr(cls, "height", None),
                                            proxy=getattr(cls, "proxy", None))
         cls.pageObjectInit()
 
