@@ -14,10 +14,10 @@ class HomePageObject(object):
         self.last_element_on_page = self.driver.find(LAST_ELEMENT)
 
     @property
-    def number_of_articles(self):
+    def number_of_top_stories_articles(self):
         return len(self.articles)
 
-    def click_on_element(self, element):
+    def click_on_article(self, element=1):
         self.articles[element-1].click()
 
 
