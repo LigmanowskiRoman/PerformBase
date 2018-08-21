@@ -10,7 +10,7 @@ from test_cases_driver import SeleniumTestCases
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--url", default="http://performgroup.com")
+    parser.add_argument("--url", default="http://www.goal.com/en-gb")
     parser.add_argument("--browser", default="Chrome")
     parser.add_argument("--device", nargs='?', const=None, default=None)
     parser.add_argument("--test_level", default="all_tests")
@@ -32,6 +32,9 @@ def suite():
     all_tests = unittest.TestSuite([smoke, regression, functional])
 
     smoke.addTest(SeleniumTestCases('test_one'))
+    smoke.addTest(SeleniumTestCases('are_titles_in_articles'))
+    smoke.addTest(SeleniumTestCases('are_images_in_articles'))
+    smoke.addTest(SeleniumTestCases('open_first_article'))
 
     return locals()[args.test_level]
 
