@@ -1,7 +1,7 @@
 import atexit
 import unittest
 import time
-from .web_driver_instance import WebDriverInstance
+from web_driver_instance import WebDriverInstance
 
 
 class BaseTestCase(unittest.TestCase):
