@@ -11,11 +11,11 @@ class SeleniumTestCases(BaseTestCase):
         print("You are currently on {}".format(self.driver.current_url()))
 
     def are_titles_in_articles(self):
-        self.assertEqual(len(self.homepage.titles),self.homepage.number_of_articles,"Not all articles have title")
+        self.assertEqual(len(self.homepage.titles),self.homepage.number_of_top_stories_articles,"Not all articles have title")
 
     def are_images_in_articles(self):
-        self.assertEqual(len(self.homepage.images),self.homepage.number_of_articles,"Not all articles have images")
+        self.assertEqual(len(self.homepage.images),self.homepage.number_of_top_stories_articles,"Not all articles have images")
 
     def open_first_article(self):
         self.homepage.click_on_article()
-        self.assertTrue(self.homepage.last_element_on_page.is_displayed())
+        self.assertTrue(self.homepage.last_element_on_page.is_displayed(), "Page is not loaded")
